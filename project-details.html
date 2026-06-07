@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Details - MD Hridoy Islam</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
+    
+    <!-- AOS Animation CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ========== ROOT VARIABLES ========== */
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --gold-gradient: linear-gradient(135deg, #ffd700 0%, #ffaa00 100%);
+            --green-gradient: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+            --fb-gradient: linear-gradient(135deg, #1877f2 0%, #0c5dc7 100%);
+            --dark-bg: #0a0a0f;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --text-primary: #ffffff;
+            --text-secondary: #b0b0b0;
+            --accent-gold: #ffd700;
+            --accent-purple: #a855f7;
+            --accent-green: #4caf50;
+            --border-glass: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Animated Background */
+        .detail-animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .detail-animated-bg::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 25% 35%, rgba(102, 126, 234, 0.12) 0%, transparent 50%),
+                        radial-gradient(circle at 75% 55%, rgba(118, 75, 162, 0.12) 0%, transparent 50%),
+                        radial-gradient(circle at 50% 80%, rgba(245, 87, 108, 0.08) 0%, transparent 50%);
+            animation: detailRotate 28s linear infinite;
+        }
+
+        @keyframes detailRotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Floating Particles */
+        .detail-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .detail-particle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.25);
+            animation: detailFloat 6s infinite;
+        }
+
+        @keyframes detailFloat {
+            0%, 100% { transform: translateY(0px) translateX(0px); opacity: 0; }
+            50% { opacity: 0.5; }
+        }
+
+        /* ========== NAVBAR ========== */
+        .detail-navbar {
+            background: rgba(10, 10, 15, 0.8) !important;
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-glass);
+            padding: 15px 0;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .detail-navbar.detail-scrolled {
+            padding: 10px 0;
+            background: rgba(10, 10, 15, 0.95) !important;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .detail-brand {
+            font-weight: 700;
+            font-size: 1.8rem;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .detail-nav-link {
+            color: var(--text-primary) !important;
+            margin: 0 10px;
+            position: relative;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .detail-nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-gradient);
+            transition: width 0.3s ease;
+        }
+
+        .detail-nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* ========== PAGE HEADER ========== */
+        .detail-page-header {
+            padding: 120px 0 50px;
+            text-align: center;
+            position: relative;
+        }
+
+        .detail-page-title {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+
+        .detail-page-title span {
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .detail-breadcrumb {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        .detail-breadcrumb a {
+            color: var(--accent-purple);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .detail-breadcrumb a:hover {
+            color: var(--accent-gold);
+        }
+
+        /* ========== MAIN SECTION ========== */
+        .detail-main-section {
+            padding: 40px 0 80px;
+        }
+
+        /* ========== INFO ALERT CARD ========== */
+        .detail-alert-card {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 152, 0, 0.1));
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            border-radius: 20px;
+            padding: 35px 40px;
+            text-align: center;
+            margin-bottom: 40px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .detail-alert-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at center, rgba(255, 215, 0, 0.08) 0%, transparent 70%);
+            animation: detailGlow 3s infinite;
+        }
+
+        @keyframes detailGlow {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.3); opacity: 1; }
+        }
+
+        .detail-alert-card:hover {
+            box-shadow: 0 25px 70px rgba(255, 215, 0, 0.2);
+            border-color: var(--accent-gold);
+            transform: translateY(-5px);
+        }
+
+        .detail-alert-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            animation: detailBounce 2s infinite;
+            position: relative;
+            z-index: 1;
+        }
+
+        @keyframes detailBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .detail-alert-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .detail-alert-text {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            max-width: 700px;
+            margin: 0 auto 10px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .detail-alert-highlight {
+            color: var(--accent-gold);
+            font-weight: 600;
+        }
+
+        /* ========== CONTACT BUTTONS SECTION ========== */
+        .detail-contact-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 25px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .detail-contact-btn {
+            padding: 16px 35px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.05rem;
+            letter-spacing: 0.5px;
+            transition: all 0.4s ease;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .detail-contact-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .detail-contact-btn:hover::before {
+            left: 100%;
+        }
+
+        .detail-contact-btn:hover {
+            transform: translateY(-5px);
+        }
+
+        /* WhatsApp Button */
+        .detail-btn-whatsapp {
+            background: var(--green-gradient);
+            color: white;
+            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4);
+        }
+
+        .detail-btn-whatsapp:hover {
+            box-shadow: 0 15px 40px rgba(37, 211, 102, 0.6);
+            color: white;
+            transform: translateY(-8px);
+        }
+
+        .detail-btn-whatsapp .btn-icon {
+            font-size: 1.6rem;
+        }
+
+        /* Facebook/Messenger Button */
+        .detail-btn-facebook {
+            background: var(--fb-gradient);
+            color: white;
+            box-shadow: 0 10px 30px rgba(24, 119, 242, 0.4);
+        }
+
+        .detail-btn-facebook:hover {
+            box-shadow: 0 15px 40px rgba(24, 119, 242, 0.6);
+            color: white;
+            transform: translateY(-8px);
+        }
+
+        .detail-btn-facebook .btn-icon {
+            font-size: 1.6rem;
+        }
+
+        /* Email Button */
+        .detail-btn-email {
+            background: var(--primary-gradient);
+            color: white;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        .detail-btn-email:hover {
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.6);
+            color: white;
+            transform: translateY(-8px);
+        }
+
+        .detail-btn-email .btn-icon {
+            font-size: 1.6rem;
+        }
+
+        /* ========== PROJECT PREVIEW CARD ========== */
+        .detail-preview-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 2px solid var(--border-glass);
+            border-radius: 25px;
+            padding: 40px;
+            margin-bottom: 35px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .detail-preview-card:hover {
+            box-shadow: 0 25px 70px rgba(102, 126, 234, 0.25);
+            border-color: var(--accent-purple);
+        }
+
+        .detail-preview-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--primary-gradient);
+        }
+
+        .detail-section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border-glass);
+        }
+
+        .detail-section-icon {
+            width: 45px;
+            height: 45px;
+            background: var(--primary-gradient);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        /* Project Screenshot Placeholder */
+        .detail-screenshot-placeholder {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.15), rgba(118, 75, 162, 0.15));
+            border: 2px dashed var(--border-glass);
+            border-radius: 20px;
+            padding: 60px;
+            text-align: center;
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .detail-screenshot-placeholder:hover {
+            border-color: var(--accent-purple);
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.2), rgba(118, 75, 162, 0.2));
+        }
+
+        .detail-screenshot-icon {
+            font-size: 5rem;
+            margin-bottom: 15px;
+            opacity: 0.6;
+        }
+
+        .detail-screenshot-text {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        /* ========== INFO BOXES ========== */
+        .detail-info-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .detail-info-box {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-glass);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .detail-info-box:hover {
+            background: rgba(255, 255, 255, 0.06);
+            transform: translateY(-5px);
+            border-color: var(--accent-purple);
+            box-shadow: 0 15px 30px rgba(102, 126, 234, 0.15);
+        }
+
+        .detail-info-box-icon {
+            font-size: 2.2rem;
+            margin-bottom: 12px;
+        }
+
+        .detail-info-box-label {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .detail-info-box-value {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--accent-gold);
+        }
+
+        /* ========== FEATURES LIST ========== */
+        .detail-features-list {
+            list-style: none;
+            padding: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+        }
+
+        .detail-feature-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-glass);
+            border-radius: 12px;
+            padding: 18px 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .detail-feature-item:hover {
+            background: rgba(255, 255, 255, 0.06);
+            transform: translateX(8px);
+            border-color: var(--accent-purple);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.15);
+        }
+
+        .detail-feature-check {
+            width: 35px;
+            height: 35px;
+            background: var(--primary-gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            flex-shrink: 0;
+            box-shadow: 0 3px 10px rgba(102, 126, 234, 0.3);
+        }
+
+        .detail-feature-text {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+        }
+
+        .detail-feature-text strong {
+            color: var(--text-primary);
+        }
+
+        /* ========== TECH TAGS ========== */
+        .detail-tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .detail-tech-tag {
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            background: rgba(168, 85, 247, 0.15);
+            border: 1px solid rgba(168, 85, 247, 0.3);
+            color: #c084fc;
+            transition: all 0.3s ease;
+        }
+
+        .detail-tech-tag:hover {
+            background: rgba(168, 85, 247, 0.25);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(168, 85, 247, 0.2);
+        }
+
+        /* ========== STEPS SECTION ========== */
+        .detail-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 25px;
+        }
+
+        .detail-step-card {
+            text-align: center;
+            padding: 25px 20px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-glass);
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .detail-step-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-purple);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.15);
+        }
+
+        .detail-step-number {
+            width: 50px;
+            height: 50px;
+            background: var(--primary-gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin: 0 auto 15px;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .detail-step-title {
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 1rem;
+        }
+
+        .detail-step-desc {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            line-height: 1.5;
+        }
+
+        /* ========== BOTTOM CTA ========== */
+        .detail-bottom-cta {
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 768px) {
+            .detail-page-title {
+                font-size: 2rem;
+            }
+            
+            .detail-preview-card {
+                padding: 25px 20px;
+            }
+            
+            .detail-alert-card {
+                padding: 25px 20px;
+            }
+            
+            .detail-alert-title {
+                font-size: 1.4rem;
+            }
+            
+            .detail-contact-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .detail-contact-btn {
+                width: 100%;
+                justify-content: center;
+                padding: 14px 25px;
+                font-size: 0.95rem;
+            }
+            
+            .detail-features-list {
+                grid-template-columns: 1fr;
+            }
+            
+            .detail-screenshot-placeholder {
+                padding: 30px;
+            }
+            
+            .detail-screenshot-icon {
+                font-size: 3rem;
+            }
+        }
+
+        /* Glowing Text */
+        .detail-glow-text {
+            text-shadow: 0 0 20px rgba(168, 85, 247, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="detail-animated-bg"></div>
+    <div class="detail-particles" id="detailParticles"></div>
+
+    <!-- Navigation -->
+    <nav class="detail-navbar navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand detail-brand" href="index.html">
+                <i class="bi bi-code-slash"></i> Hridoy
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#detailNavbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="detailNavbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link detail-nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link detail-nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link detail-nav-link" href="resume.html">Resume</a></li>
+                    <li class="nav-item"><a class="nav-link detail-nav-link" href="skills.html">Skills</a></li>
+                    <li class="nav-item"><a class="nav-link detail-nav-link active" href="projects.html">Projects</a></li>
+                    <li class="nav-item"><a class="nav-link detail-nav-link" href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="detail-page-header">
+        <div class="container">
+            <h1 class="detail-page-title" data-aos="fade-down">
+                Project <span>Details</span>
+            </h1>
+            <p class="detail-breadcrumb" data-aos="fade-up" data-aos-delay="200">
+                <a href="index.html">Home</a> / <a href="projects.html">Projects</a> / Project Details
+            </p>
+        </div>
+    </section>
+
+    <!-- Main Section -->
+    <section class="detail-main-section">
+        <div class="container">
+            
+            <!-- ========== IMPORTANT ALERT ========== -->
+            <div class="detail-alert-card" data-aos="zoom-in" data-aos-duration="800">
+                <div class="detail-alert-icon">🔐</div>
+                <h2 class="detail-alert-title">Want to See the Full Project Demo?</h2>
+                <p class="detail-alert-text">
+                    To view the <span class="detail-alert-highlight">complete project demonstration</span>, 
+                    detailed walkthrough, or access the source code, please contact me directly. 
+                    I'll be happy to show you the full project functionality!
+                </p>
+                <p class="detail-alert-text">
+                    <i class="bi bi-lightning-charge-fill text-warning"></i> 
+                    For <span class="detail-alert-highlight">quick response</span>, message me on WhatsApp or Facebook.
+                </p>
+
+                <!-- Contact Buttons -->
+                <div class="detail-contact-buttons">
+                    <!-- WhatsApp Button -->
+                    <a href="https://wa.me/8801763029679" 
+                       target="_blank" 
+                       class="detail-contact-btn detail-btn-whatsapp">
+                        <span class="btn-icon"><i class="bi bi-whatsapp"></i></span>
+                        <span>
+                            Chat on WhatsApp
+                            <small style="display:block; font-weight:400; font-size:0.75rem; opacity:0.9;">Fast Response</small>
+                        </span>
+                    </a>
+
+                    <!-- Facebook Messenger Button -->
+                    <a href="https://www.facebook.com/hridoy42679" 
+                       target="_blank" 
+                       class="detail-contact-btn detail-btn-facebook">
+                        <span class="btn-icon"><i class="bi bi-messenger"></i></span>
+                        <span>
+                            Message on Facebook
+                            <small style="display:block; font-weight:400; font-size:0.75rem; opacity:0.9;">Quick Reply</small>
+                        </span>
+                    </a>
+
+                    <!-- Email Button -->
+                    <a href="mailto:ridoyislam2679@gmail.com" 
+                       class="detail-contact-btn detail-btn-email">
+                        <span class="btn-icon"><i class="bi bi-envelope-fill"></i></span>
+                        <span>
+                            Send Email
+                            <small style="display:block; font-weight:400; font-size:0.75rem; opacity:0.9;">24hr Response</small>
+                        </span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- ========== PROJECT PREVIEW ========== -->
+            <div class="detail-preview-card" data-aos="fade-up" data-aos-duration="800">
+                <div class="detail-section-title">
+                    <div class="detail-section-icon">
+                        <i class="bi bi-image"></i>
+                    </div>
+                    Project Preview
+                </div>
+
+                <!-- Screenshot Placeholder -->
+                <div class="detail-screenshot-placeholder">
+                    <div class="detail-screenshot-icon">🖼️</div>
+                    <h4>Project Screenshots & Demo Video</h4>
+                    <p class="detail-screenshot-text">
+                        Contact me to view the full project screenshots, walkthrough video, 
+                        and live demonstration of all features.
+                    </p>
+                </div>
+
+                <!-- Tech Tags -->
+                <div class="detail-tech-tags">
+                    <span class="detail-tech-tag"><i class="bi bi-filetype-php"></i> PHP</span>
+                    <span class="detail-tech-tag"><i class="bi bi-database"></i> MySQL</span>
+                    <span class="detail-tech-tag"><i class="bi bi-bootstrap-fill"></i> Bootstrap 5</span>
+                    <span class="detail-tech-tag"><i class="bi bi-filetype-js"></i> JavaScript</span>
+                    <span class="detail-tech-tag"><i class="bi bi-arrow-repeat"></i> AJAX</span>
+                    <span class="detail-tech-tag"><i class="bi bi-filetype-css"></i> CSS3</span>
+                    <span class="detail-tech-tag"><i class="bi bi-filetype-html"></i> HTML5</span>
+                </div>
+            </div>
+
+            <!-- ========== PROJECT INFO BOXES ========== -->
+            <div class="detail-info-row" data-aos="fade-up" data-aos-duration="800" data-aos-delay="100">
+                <div class="detail-info-box">
+                    <div class="detail-info-box-icon">📅</div>
+                    <div class="detail-info-box-label">Project Year</div>
+                    <div class="detail-info-box-value">2023 - 2024</div>
+                </div>
+                <div class="detail-info-box">
+                    <div class="detail-info-box-icon">⏱️</div>
+                    <div class="detail-info-box-label">Development Time</div>
+                    <div class="detail-info-box-value">2 - 4 Weeks</div>
+                </div>
+                <div class="detail-info-box">
+                    <div class="detail-info-box-icon">💻</div>
+                    <div class="detail-info-box-label">Technologies</div>
+                    <div class="detail-info-box-value">7+ Tools</div>
+                </div>
+                <div class="detail-info-box">
+                    <div class="detail-info-box-icon">🎯</div>
+                    <div class="detail-info-box-label">Project Type</div>
+                    <div class="detail-info-box-value">Full Stack Web App</div>
+                </div>
+            </div>
+
+            <!-- ========== KEY FEATURES ========== -->
+            <div class="detail-preview-card" data-aos="fade-up" data-aos-duration="800" data-aos-delay="150">
+                <div class="detail-section-title">
+                    <div class="detail-section-icon">
+                        <i class="bi bi-star-fill"></i>
+                    </div>
+                    Key Features
+                </div>
+                <ul class="detail-features-list">
+                    <li class="detail-feature-item">
+                        <div class="detail-feature-check"><i class="bi bi-check-lg"></i></div>
+                        <div class="detail-feature-text"><strong>Responsive Design</strong> - Fully responsive layout for all devices</div>
+                    </li>
+                    <li class="detail-feature-item">
+                        <div class="detail-feature-check"><i class="bi bi-check-lg"></i></div>
+                        <div class="detail-feature-text"><strong>User Authentication</strong> - Secure login & registration system</div>
+                    </li>
+                    <li class="detail-feature-item">
+                        <div class="detail-feature-check"><i class="bi bi-check-lg"></i></div>
+                        <div class="detail-feature-text"><strong>Admin Dashboard</strong> - Complete admin control panel</div>
+                    </li>
+                    <li class="detail-feature-item">
+                        <div class="detail-feature-check"><i class="bi bi-check-lg"></i></div>
+                        <div class="detail-feature-text"><strong>Database Management</strong> - MySQL database with CRUD operations</div>
+                    </li>
+                    <li class="detail-feature-item">
+                        <div class="detail-feature-check"><i class="bi bi-check-lg"></i></div>
+                        <div class="detail-feature-text"><strong>AJAX Integration</strong> - Dynamic content loading</div>
+                    </li>
+                    <li class="detail-feature-item">
+                        <div class="detail-feature-check"><i class="bi bi-check-lg"></i></div>
+                        <div class="detail-feature-text"><strong>SEO Optimized</strong> - On-page SEO best practices</div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- ========== HOW TO GET DEMO ========== -->
+            <div class="detail-preview-card" data-aos="fade-up" data-aos-duration="800" data-aos-delay="200">
+                <div class="detail-section-title">
+                    <div class="detail-section-icon">
+                        <i class="bi bi-question-circle-fill"></i>
+                    </div>
+                    How to Get the Full Demo
+                </div>
+                <p class="text-secondary mb-4" style="font-size: 0.95rem;">
+                    Follow these simple steps to view the complete project demonstration and discuss details:
+                </p>
+
+                <div class="detail-steps">
+                    <div class="detail-step-card">
+                        <div class="detail-step-number">1</div>
+                        <h4 class="detail-step-title">📱 Contact Me</h4>
+                        <p class="detail-step-desc">
+                            Send me a message on WhatsApp or Facebook with the project name you're interested in.
+                        </p>
+                    </div>
+                    <div class="detail-step-card">
+                        <div class="detail-step-number">2</div>
+                        <h4 class="detail-step-title">📋 Discuss Requirements</h4>
+                        <p class="detail-step-desc">
+                            Tell me what aspects of the project you'd like to see - I'll prepare the demo accordingly.
+                        </p>
+                    </div>
+                    <div class="detail-step-card">
+                        <div class="detail-step-number">3</div>
+                        <h4 class="detail-step-title">🎥 Schedule Demo</h4>
+                        <p class="detail-step-desc">
+                            We'll schedule a convenient time for a live demo or I'll send you a recorded walkthrough.
+                        </p>
+                    </div>
+                    <div class="detail-step-card">
+                        <div class="detail-step-number">4</div>
+                        <h4 class="detail-step-title">✅ Review & Feedback</h4>
+                        <p class="detail-step-desc">
+                            Review the project, ask questions, and discuss any custom requirements you may have.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== BOTTOM CTA ========== -->
+            <div class="detail-bottom-cta" data-aos="zoom-in" data-aos-duration="800" data-aos-delay="300">
+                <div class="detail-alert-card" style="margin-bottom: 0;">
+                    <div class="detail-alert-icon">🚀</div>
+                    <h2 class="detail-alert-title">Ready to See the Project in Action?</h2>
+                    <p class="detail-alert-text">
+                        Don't hesitate to reach out! I'm always excited to showcase my work and discuss 
+                        potential collaborations.
+                    </p>
+                    <div class="detail-contact-buttons">
+                        <a href="https://wa.me/8801763029679" 
+                           target="_blank" 
+                           class="detail-contact-btn detail-btn-whatsapp">
+                            <span class="btn-icon"><i class="bi bi-whatsapp"></i></span>
+                            WhatsApp Me Now
+                        </a>
+                        <a href="https://www.facebook.com/hridoy42679" 
+                           target="_blank" 
+                           class="detail-contact-btn detail-btn-facebook">
+                            <span class="btn-icon"><i class="bi bi-messenger"></i></span>
+                            Facebook Messenger
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-4" style="border-top: 1px solid var(--border-glass);">
+        <div class="container text-center">
+            <p class="mb-0 text-secondary">
+                &copy; 2024 MD Hridoy Islam. All Rights Reserved.
+            </p>
+            <p class="mt-2 mb-0">
+                <a href="index.html" class="text-secondary text-decoration-none me-3">Home</a>
+                <a href="about.html" class="text-secondary text-decoration-none me-3">About</a>
+                <a href="resume.html" class="text-secondary text-decoration-none me-3">Resume</a>
+                <a href="projects.html" class="text-secondary text-decoration-none me-3">Projects</a>
+                <a href="skills.html" class="text-secondary text-decoration-none me-3">Skills</a>
+                <a href="contact.html" class="text-secondary text-decoration-none">Contact</a>
+            </p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <script>
+        // Initialize AOS Animation
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.detail-navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('detail-scrolled');
+            } else {
+                navbar.classList.remove('detail-scrolled');
+            }
+        });
+
+        // Create Floating Particles
+        function createDetailParticles() {
+            const container = document.getElementById('detailParticles');
+            if (!container) return;
+            
+            for (let i = 0; i < 35; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'detail-particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.width = Math.random() * 5 + 2 + 'px';
+                particle.style.height = particle.style.width;
+                particle.style.animationDelay = Math.random() * 6 + 's';
+                particle.style.animationDuration = Math.random() * 6 + 4 + 's';
+                container.appendChild(particle);
+            }
+        }
+        
+        createDetailParticles();
+    </script>
+</body>
+</html>
